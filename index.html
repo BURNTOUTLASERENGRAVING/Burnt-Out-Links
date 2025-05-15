@@ -2,248 +2,275 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Burnt Out Laser Engraving | Links</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css?family=Oswald:700&display=swap" rel="stylesheet">
+  <title>Burnt Out Laser Engraving | Links</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --text: #fff;
-      --red: #c0392b;
-      --orange: #e67e22;
-      --fb: #1877f2;
-      --insta: #5851db;
-      --glow: 0 0 12px 2px #c0392bcc;
-      --glow-orange: 0 0 10px 1px #e67e22bb;
-      --glow-fb: 0 0 10px 1px #1877f299;
-      --glow-insta: 0 0 10px 1px #5851db99;
-      --shadow: 0 2px 12px 0 #000b, 0 4px 32px 0 #0007;
+      /* Color Palette */
+      --color-background: #121212; /* Very dark grey, almost black */
+      --color-surface: #1e1e1e;   /* Slightly lighter for container */
+      --color-surface-alt: #2a2a2a; /* For button backgrounds */
+      --color-primary: #e67e22;  /* Orange - kept from original */
+      --color-secondary: #c0392b; /* Red - kept from original */
+      --color-text-primary: #f0f0f0;
+      --color-text-secondary: #a0a0a0;
+      --color-border: #383838;
+      --color-glow-primary: #e67e2288;
+      --color-glow-secondary: #c0392b88;
+
+      /* Typography */
+      --font-heading: 'Oswald', sans-serif;
+      --font-body: 'Inter', sans-serif;
+
+      /* Spacing & Sizing */
+      --spacing-unit: 8px;
+      --border-radius-small: 4px;
+      --border-radius-medium: 8px;
+      --border-radius-large: 12px;
+
+      /* Transitions */
+      --transition-fast: 0.15s ease-out;
+      --transition-medium: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+      /* Shadows */
+      --shadow-sm: 0 2px 4px rgba(0,0,0,0.2);
+      --shadow-md: 0 4px 10px rgba(0,0,0,0.3), 0 0 1px rgba(0,0,0,0.2);
+      --shadow-lg: 0 10px 20px rgba(0,0,0,0.25), 0 3px 6px rgba(0,0,0,0.2);
     }
 
-    html, body {
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      height: 100%;
-      font-family: 'Oswald', Arial, sans-serif;
-      background: #000;
-      color: var(--text);
-      overflow-x: hidden;
     }
 
-    #bg-video {
-      position: fixed;
-      top: 0;
-      left: 0;
-      min-width: 100%;
-      min-height: 100%;
-      z-index: -1;
-      object-fit: cover;
-      opacity: 0.4;
-      filter: brightness(1.1) contrast(1.3) saturate(1.2);
-      pointer-events: none;
+    html {
+      scroll-behavior: smooth;
+      font-size: 100%; /* 1rem = 16px */
     }
 
     body {
+      font-family: var(--font-body);
+      background-color: var(--color-background);
+      background-image:
+        radial-gradient(circle at 1px 1px, rgba(200,200,200,0.05) 1px, transparent 0), /* Subtle dot grid */
+        linear-gradient(175deg, var(--color-background) 0%, #0a0a0a 100%); /* Subtle gradient */
+      color: var(--color-text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
       display: flex;
+      flex-direction: column; /* Allows for footer if needed */
       align-items: center;
       justify-content: center;
+      padding: calc(var(--spacing-unit) * 3);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    .container {
-      max-width: 420px;
-      width: 95vw;
-      padding: 3.5em 1.2em 2.5em 1.2em;
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(6px);
-      border-radius: 1em;
-      box-shadow: var(--shadow);
+    .linktree-container {
+      background-color: color-mix(in srgb, var(--color-surface) 90%, transparent);
+      backdrop-filter: blur(12px) saturate(150%);
+      -webkit-backdrop-filter: blur(12px) saturate(150%);
+      border: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent);
+      border-radius: var(--border-radius-large);
+      box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255,255,255,0.03) inset;
+      padding: clamp(calc(var(--spacing-unit) * 3), 5vw, calc(var(--spacing-unit) * 5));
+      width: 100%;
+      max-width: 480px;
       text-align: center;
       position: relative;
-      z-index: 1;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInSlideUp 0.7s 0.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    }
+
+    @keyframes fadeInSlideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .brand-header {
-      font-size: 2.6em;
+      margin-bottom: calc(var(--spacing-unit) * 4);
+    }
+
+    .brand-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2em, 6vw, 2.8em);
       font-weight: 700;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      margin-bottom: 2em;
-      text-align: center;
-      overflow: hidden;
-    }
-
-    .brand-header span {
-      display: inline-block;
-      background: linear-gradient(90deg, #fff 60%, #e67e22);
-      background-clip: text;
+      background: linear-gradient(90deg, var(--color-text-primary) 50%, var(--color-primary));
       -webkit-background-clip: text;
-      color: transparent;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
+      color: transparent; /* Fallback for non-webkit */
+      margin-bottom: calc(var(--spacing-unit) * 1.5);
+      line-height: 1.2;
       position: relative;
-      white-space: nowrap;
-      animation: laserEtch 2.4s ease-out forwards, laserPulse 6s ease-in-out infinite;
-      opacity: 0;
+      /* Adding a subtle "laser line" that appears */
     }
 
-    .brand-header span::before {
+    .brand-title::after {
       content: '';
       position: absolute;
-      bottom: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      background: linear-gradient(to right, transparent 0%, #e67e22 50%, transparent 100%);
-      animation: laserSweep 2.4s ease-out forwards;
-      z-index: 1;
-      pointer-events: none;
-      opacity: 0.6;
-      mix-blend-mode: screen;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2.5px;
+      background: linear-gradient(90deg, var(--color-secondary) 0%, var(--color-primary) 70%, var(--color-primary) 100%);
+      border-radius: 2px;
+      opacity: 0.9;
+      animation: expandLine 1s 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
     }
 
-    .brand-header::after {
-      content: '';
+    @keyframes expandLine {
+      to {
+        width: 60px; /* Adjust width as needed */
+      }
+    }
+
+    .links-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: calc(var(--spacing-unit) * 2);
+    }
+
+    .link-item a {
       display: block;
-      width: 90px;
-      height: 3px;
-      margin: 1.3em auto 0;
-      background: linear-gradient(90deg, #c0392b 30%, #e67e22 70%);
-      border-radius: 2px;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+      text-decoration: none;
+      color: var(--color-text-primary);
+      background-color: color-mix(in srgb, var(--color-surface-alt) 95%, transparent);
+      padding: calc(var(--spacing-unit) * 1.75) calc(var(--spacing-unit) * 2.5);
+      border-radius: var(--border-radius-medium);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-sm), 0 0 0 1px rgba(255,255,255,0.02) inset;
+      position: relative;
+      overflow: hidden; /* For pseudo-element effects */
+      transition:
+        transform var(--transition-fast),
+        box-shadow var(--transition-medium),
+        background-color var(--transition-medium),
+        border-color var(--transition-medium);
+      z-index: 1;
+    }
+    .link-item a::before { /* Subtle hover highlight */
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%; /* Start off-screen */
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-primary) 30%, transparent), transparent);
+      transition: left var(--transition-medium);
+      z-index: -1;
+      opacity: 0.7;
+    }
+
+    .link-item a:hover,
+    .link-item a:focus-visible {
+      transform: translateY(-3px) scale(1.01);
+      border-color: var(--color-primary);
+      background-color: color-mix(in srgb, var(--color-surface-alt) 70%, var(--color-primary) 10%);
+      box-shadow: var(--shadow-md), 0 0 15px var(--color-glow-primary);
+    }
+    .link-item a:hover::before {
+      left: 100%; /* Sweep across */
+    }
+
+    .link-item a:focus-visible { /* Explicit focus style for accessibility */
+        outline: 2px solid var(--color-primary);
+        outline-offset: 3px;
+    }
+
+    .link-item a:active {
+      transform: translateY(-1px) scale(0.99);
+      background-color: color-mix(in srgb, var(--color-surface-alt) 50%, var(--color-primary) 5%);
+      box-shadow: var(--shadow-sm), 0 0 5px var(--color-glow-primary);
+    }
+
+    /* Optional: Different accent for specific links */
+    .link-item.tiktok a:hover, .link-item.tiktok a:focus-visible { border-color: #00f2ea; box-shadow: var(--shadow-md), 0 0 15px #00f2ea88; }
+    .link-item.insta a:hover, .link-item.insta a:focus-visible { border-color: #c13584; box-shadow: var(--shadow-md), 0 0 15px #c1358488; }
+    .link-item.fb a:hover, .link-item.fb a:focus-visible { border-color: #1877f2; box-shadow: var(--shadow-md), 0 0 15px #1877f288; }
+
+
+    .tagline {
+      margin-top: calc(var(--spacing-unit) * 4);
+      font-size: clamp(0.8rem, 2vw, 0.95rem);
+      color: var(--color-text-secondary);
+      font-style: italic;
+      border-top: 1px solid var(--color-border);
+      padding-top: calc(var(--spacing-unit) * 2);
       opacity: 0.8;
     }
 
-    @keyframes laserEtch {
-      0% {
-        opacity: 0;
-        transform: scale(1.05) translateY(10px);
-        letter-spacing: 4px;
-        filter: blur(3px);
+    @media (prefers-reduced-motion: reduce) {
+      .linktree-container,
+      .brand-title::after,
+      .link-item a,
+      .link-item a::before {
+        animation: none !important;
+        transition: none !important;
+        transform: translateY(0) !important; /* Reset transforms */
       }
-      50% {
-        opacity: 1;
-        filter: brightness(1.5) blur(0.5px);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-        letter-spacing: 2px;
-        filter: none;
-      }
+      .linktree-container { opacity: 1; }
+      .brand-title::after { width: 60px; } /* Set final state directly */
+      .link-item a:hover::before { left: -100%; } /* Keep pseudo hidden */
     }
 
-    @keyframes laserSweep {
-      0% {
-        transform: translateX(-100%);
-      }
-      100% {
-        transform: translateX(100%);
-        opacity: 0;
-      }
-    }
-
-    @keyframes laserPulse {
-      0%, 100% {
-        text-shadow: 0 1px 10px #c0392b33, 0 1px 1px #333, 0 2px 16px #000a;
-      }
-      50% {
-        text-shadow: 0 0 12px #e67e22aa, 0 1px 1px #c0392b, 0 2px 24px #e67e22aa;
-      }
-    }
-
-    .links {
-      display: flex;
-      flex-direction: column;
-      gap: 1.25em;
-    }
-
-    .link-btn {
-      display: block;
-      width: 97%;
-      margin: 0 auto;
-      padding: 1.07em 0;
-      font-size: 1.15em;
-      font-weight: 700;
-      letter-spacing: 1.3px;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: #fff;
-      background: linear-gradient(102deg, #191919 65%, #222 100%);
-      border: 1.5px solid #333;
-      border-radius: 0.55em;
-      box-shadow:
-        0 1.5px 8px 1.5px #0009 inset,
-        0 2px 14px 0 #0005;
-      position: relative;
-      cursor: pointer;
-      transition: 0.2s ease;
-    }
-
-    .link-btn:before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      opacity: 0.16;
-      background: repeating-linear-gradient(120deg, #222 0 2px, transparent 2px 8px);
-      pointer-events: none;
-      border-radius: inherit;
-    }
-
-    .link-btn:after {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 6px;
-      background: linear-gradient(180deg, #c0392b 60%, #e67e22 100%);
-      opacity: 0.93;
-      border-radius: 0.5em 0 0 0.5em;
-    }
-
-    .link-btn:nth-child(1):hover { box-shadow: var(--glow), var(--shadow); border-color: #c0392b; }
-    .link-btn:nth-child(2):hover { box-shadow: var(--glow-orange), var(--shadow); border-color: #e67e22; }
-    .link-btn:nth-child(3):hover { box-shadow: var(--glow-insta), var(--shadow); border-color: #5851db; }
-    .link-btn:nth-child(4):hover { box-shadow: var(--glow-fb), var(--shadow); border-color: #1877f2; }
-
-    .link-btn:active {
-      background: linear-gradient(105deg, #1a1a1a 70%, #191919 100%);
-      color: #e67e22;
-    }
-
-    .tagline {
-      margin-top: 2em;
-      font-size: 1em;
-      font-style: italic;
-      color: #ffa06b;
-      text-shadow: 0 2px 16px #111a, 0 1px 0 #2228;
-      opacity: 0.88;
-      border-top: 1.5px solid #252525;
-      padding-top: 1em;
-    }
-
-    @media (max-width: 600px) {
-      .brand-header {
-        font-size: 1.6em;
-      }
-      .link-btn {
-        font-size: 1em;
-        padding: 0.9em 0;
-      }
-    }
   </style>
 </head>
 <body>
-  <video autoplay muted loop playsinline id="bg-video">
-    <source src="Generated File May 15, 2025 - 9_45PM.mp4" type="video/mp4">
-  </video>
 
-  <div class="container">
-    <div class="brand-header"><span>Burnt Out Laser Engraving</span></div>
-    <div class="links">
-      <a class="link-btn" href="https://payhip.com/BurntOutLaserEngraving" target="_blank">Official Store</a>
-      <a class="link-btn" href="https://www.tiktok.com/@burntoutlaserengraving" target="_blank">TikTok</a>
-      <a class="link-btn" href="https://www.instagram.com/burntout_laserengraving" target="_blank">Instagram</a>
-      <a class="link-btn" href="https://www.facebook.com/profile.php?id=61561918272309&name=xhp_nt__fb__action__open_user" target="_blank">Facebook</a>
-    </div>
-    <div class="tagline">Turning ideas into badass engravings.</div>
-  </div>
+  <main class="linktree-container">
+    <header class="brand-header">
+      <h1 class="brand-title">Burnt Out Laser Engraving</h1>
+    </header>
+
+    <nav>
+      <ul class="links-list">
+        <li class="link-item">
+          <a href="https://payhip.com/BurntOutLaserEngraving" target="_blank" rel="noopener noreferrer">Official Store</a>
+        </li>
+        <li class="link-item tiktok"> <!-- Added class for specific hover -->
+          <a href="https://www.tiktok.com/@burntoutlaserengraving" target="_blank" rel="noopener noreferrer">TikTok</a>
+        </li>
+        <li class="link-item insta"> <!-- Added class for specific hover -->
+          <a href="https://www.instagram.com/burntout_laserengraving" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </li>
+        <li class="link-item fb"> <!-- Added class for specific hover -->
+          <a href="https://www.facebook.com/profile.php?id=61561918272309&name=xhp_nt__fb__action__open_user" target="_blank" rel="noopener noreferrer">Facebook</a>
+        </li>
+        <!-- Add more links as needed -->
+        <!--
+        <li class="link-item">
+          <a href="#" target="_blank" rel="noopener noreferrer">Another Link</a>
+        </li>
+        -->
+      </ul>
+    </nav>
+
+    <footer class="tagline">
+      Turning ideas into badass engravings.
+    </footer>
+  </main>
+
 </body>
 </html>
