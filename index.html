@@ -9,152 +9,221 @@
   <style>
     :root {
       --bg: #111111;
+      --overlay: repeating-linear-gradient(
+        135deg,
+        #181818 0px,
+        #181818 10px,
+        #151515 10px,
+        #151515 20px
+      );
       --text: #fff;
+      --metal: #232323;
       --red: #c0392b;
       --orange: #e67e22;
-      --accent: var(--red);
-      --button-radius: 0.7em;
+      --fb: #1877f2;
+      --insta: #5851db;
+      --radius: 1em;
+      --glow: 0 0 12px 2px #c0392bcc;
+      --glow-orange: 0 0 10px 1px #e67e22bb;
+      --glow-fb: 0 0 10px 1px #1877f299;
+      --glow-insta: 0 0 10px 1px #5851db99;
+      --shadow: 0 2px 12px 0 #000b, 0 4px 32px 0 #0007;
     }
 
     html, body {
       height: 100%;
       margin: 0;
       padding: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Oswald', Arial, sans-serif;
-      box-sizing: border-box;
       min-height: 100vh;
     }
 
     body {
+      min-height: 100vh;
+      background: var(--bg), var(--overlay);
+      background-blend-mode: overlay;
+      color: var(--text);
+      font-family: 'Oswald', Arial, sans-serif;
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
     }
 
     .container {
-      width: 100%;
-      max-width: 430px;
-      margin: auto;
-      padding: 4.5em 1em 2em 1em;
-      background: rgba(17,17,17,0.96);
-      box-shadow: 0 4px 32px 2px rgba(0,0,0,0.19);
-      border-radius: 1.2em;
+      width: 95vw;
+      max-width: 420px;
+      margin: 0 auto;
+      background: rgba(18,18,18,0.96);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 3.5em 1.2em 2.5em 1.2em;
       display: flex;
       flex-direction: column;
       align-items: center;
       position: relative;
-      z-index: 2;
+      overflow: hidden;
+      z-index: 1;
     }
 
-    h1 {
+    .brand-header {
       font-family: 'Oswald', Arial, sans-serif;
-      font-size: 2.25em;
+      font-size: 2.6em;
       font-weight: 700;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
       text-transform: uppercase;
-      margin: 0 0 1.5em 0;
-      text-align: center;
-      color: var(--text);
-      text-shadow: 0 2px 8px #000a, 0 1px 0 #2225;
+      color: #fff;
+      margin: 0 0 2em 0;
+      text-shadow:
+        0 1px 10px #c0392b33,
+        0 1px 1px #333,
+        0 2px 16px #000a;
+      position: relative;
+      background: linear-gradient(90deg, #fff 60%, #e67e22 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 1px 0 #0009);
+      letter-spacing: 2px;
+      user-select: none;
+    }
+
+    .brand-header:after {
+      content: '';
+      display: block;
+      width: 90px;
+      height: 3px;
+      background: linear-gradient(90deg, #c0392b 30%, #e67e22 70%);
+      margin: 1.3em auto 0 auto;
+      border-radius: 2px;
+      opacity: 0.8;
     }
 
     .links {
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 1.1em;
-      margin-bottom: 2em;
+      gap: 1.25em;
+      margin-bottom: 2.7em;
+      align-items: center;
     }
 
     .link-btn {
-      display: block;
-      width: 100%;
-      padding: 1em 0;
+      width: 97%;
+      min-width: 210px;
       font-size: 1.15em;
       font-family: 'Oswald', Arial, sans-serif;
       font-weight: 700;
-      letter-spacing: 1px;
+      letter-spacing: 1.3px;
+      padding: 1.07em 0;
       text-align: center;
-      background: var(--accent);
+      text-transform: uppercase;
       color: #fff;
-      text-decoration: none;
-      border-radius: var(--button-radius);
-      box-shadow: 0 2px 16px 0 #0004;
-      border: 2px solid transparent;
-      transition: 
-        background 0.2s cubic-bezier(.4,.3,.3,1), 
-        border-color 0.18s cubic-bezier(.6,.3,.4,1),
-        box-shadow 0.23s cubic-bezier(.7,.4,.3,1);
-      outline: none;
-      cursor: pointer;
+      background: linear-gradient(102deg, #191919 65%, #222 100%);
+      border: 1.5px solid #333;
+      border-radius: 0.55em;
+      margin: 0 auto;
+      box-shadow:
+        0 1.5px 8px 1.5px #0009 inset,
+        0 2px 14px 0 #0005;
       position: relative;
-      filter: brightness(0.96) saturate(1.13) contrast(1.1);
-      user-select: none;
-    }
-    .link-btn:nth-child(2) { background: var(--red);}
-    .link-btn:nth-child(3) { background: var(--orange);}
-    .link-btn:nth-child(4) { background: #5851db; }  /* Instagram purple */
-    .link-btn:nth-child(5) { background: #1877f2; }  /* Facebook blue */
-
-    .link-btn:hover,
-    .link-btn:focus {
-      filter: brightness(1.07) saturate(1.19);
-      border-color: #fff7;
-      box-shadow: 0 4px 24px 0 #e67e2240, 0 2px 8px 0 #0007;
-      z-index: 1;
+      cursor: pointer;
+      transition:
+        border-color 0.16s,
+        box-shadow 0.16s,
+        background 0.19s,
+        color 0.17s;
       text-decoration: none;
+      overflow: hidden;
     }
+    .link-btn span {
+      position: relative;
+      z-index: 2;
+    }
+    .link-btn:before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.16;
+      background: repeating-linear-gradient(120deg, #222 0 2px, transparent 2px 8px);
+      pointer-events: none;
+      border-radius: inherit;
+      z-index: 1;
+    }
+
+    /* Accent stripes/metal border on left */
+    .link-btn:after {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 6px;
+      border-radius: 0.5em 0 0 0.5em;
+      background: linear-gradient(180deg, #c0392b 60%, #e67e22 100%);
+      opacity: 0.93;
+      transition: opacity 0.22s;
+      z-index: 2;
+    }
+
+    /* Unique glows and hover for each button */
+    .link-btn:nth-child(1):hover, .link-btn:nth-child(1):focus { box-shadow: var(--glow), var(--shadow); border-color: #c0392b; }
+    .link-btn:nth-child(2):hover, .link-btn:nth-child(2):focus { box-shadow: var(--glow-orange), var(--shadow); border-color: #e67e22; }
+    .link-btn:nth-child(3):hover, .link-btn:nth-child(3):focus { box-shadow: var(--glow-insta), var(--shadow); border-color: #5851db; }
+    .link-btn:nth-child(4):hover, .link-btn:nth-child(4):focus { box-shadow: var(--glow-fb), var(--shadow); border-color: #1877f2; }
 
     .link-btn:active {
-      filter: brightness(0.91);
-      box-shadow: 0 1px 6px 0 #0009;
+      background: linear-gradient(105deg, #1a1a1a 70%, #191919 100%);
+      color: #e67e22;
     }
 
-    footer {
-      margin-top: auto;
-      padding: 2em 0 1.5em 0;
+    /* Tagline/footer integrated in the card */
+    .tagline {
       width: 100%;
-      text-align: center;
-      font-size: 1.1em;
-      letter-spacing: 0.5px;
-      color: #ccc;
+      margin: 2em auto 0 auto;
+      padding: 0.7em 0 0.2em 0;
+      font-size: 1.02em;
       font-family: Arial, sans-serif;
-      opacity: 0.85;
-      text-shadow: 0 1px 2px #000a;
+      color: #ffa06b;
+      letter-spacing: 1px;
+      text-align: center;
+      opacity: 0.88;
+      text-shadow: 0 2px 16px #111a, 0 1px 0 #2228;
+      border-top: 1.5px solid #252525;
+      font-style: italic;
+      user-select: none;
     }
 
     @media (max-width: 600px) {
       .container {
-        max-width: 98vw;
-        padding: 3.5em 0.3em 1.5em 0.3em;
-        border-radius: 0.6em;
+        max-width: 99vw;
+        padding: 2.7em 0.3em 1.5em 0.3em;
+        border-radius: 0.7em;
       }
-      h1 {
+      .brand-header {
         font-size: 1.5em;
       }
       .link-btn {
         font-size: 1em;
         padding: 0.88em 0;
+        min-width: 130px;
+      }
+      .tagline {
+        font-size: 0.98em;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Burnt Out Laser Engraving</h1>
+    <div class="brand-header">Burnt Out Laser Engraving</div>
     <div class="links">
-      <a class="link-btn" href="https://payhip.com/BurntOutLaserEngraving" target="_blank" rel="noopener">Official Store</a>
-      <a class="link-btn" href="https://www.tiktok.com/@burntoutlaserengraving" target="_blank" rel="noopener">TikTok</a>
-      <a class="link-btn" href="https://www.instagram.com/burntout_laserengraving" target="_blank" rel="noopener">Instagram</a>
-      <a class="link-btn" href="https://www.facebook.com/profile.php?id=61561918272309&name=xhp_nt__fb__action__open_user" target="_blank" rel="noopener">Facebook</a>
+      <a class="link-btn" href="https://payhip.com/BurntOutLaserEngraving" target="_blank" rel="noopener"><span>Official Store</span></a>
+      <a class="link-btn" href="https://www.tiktok.com/@burntoutlaserengraving" target="_blank" rel="noopener"><span>TikTok</span></a>
+      <a class="link-btn" href="https://www.instagram.com/burntout_laserengraving" target="_blank" rel="noopener"><span>Instagram</span></a>
+      <a class="link-btn" href="https://www.facebook.com/profile.php?id=61561918272309&name=xhp_nt__fb__action__open_user" target="_blank" rel="noopener"><span>Facebook</span></a>
+    </div>
+    <div class="tagline">
+      Turning ideas into badass engravings.
     </div>
   </div>
-  <footer>
-    Designed To Stand Out. Built To Last.
-  </footer>
 </body>
 </html>
