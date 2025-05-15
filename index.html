@@ -4,18 +4,10 @@
   <meta charset="UTF-8">
   <title>Burnt Out Laser Engraving | Links</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Oswald Font -->
   <link href="https://fonts.googleapis.com/css?family=Oswald:700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #111111;
-      --overlay: repeating-linear-gradient(
-        135deg,
-        #181818 0px,
-        #181818 10px,
-        #151515 10px,
-        #151515 20px
-      );
       --text: #fff;
       --metal: #232323;
       --red: #c0392b;
@@ -31,115 +23,99 @@
     }
 
     html, body {
-      height: 100%;
       margin: 0;
       padding: 0;
-      min-height: 100vh;
+      height: 100%;
+      font-family: 'Oswald', Arial, sans-serif;
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -1;
+      object-fit: cover;
+      opacity: 0.18;
+      filter: brightness(0.85) contrast(1.2) saturate(1.1);
+      pointer-events: none;
     }
 
     body {
-      min-height: 100vh;
-      background: var(--bg), var(--overlay);
-      background-blend-mode: overlay;
-      color: var(--text);
-      font-family: 'Oswald', Arial, sans-serif;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
+      background: var(--bg);
     }
 
     .container {
-      width: 95vw;
       max-width: 420px;
-      margin: 0 auto;
-      background: rgba(18,18,18,0.96);
+      width: 95vw;
+      padding: 3.5em 1.2em 2.5em 1.2em;
+      background: rgba(17, 17, 17, 0.95);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 3.5em 1.2em 2.5em 1.2em;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      text-align: center;
       position: relative;
-      overflow: hidden;
       z-index: 1;
     }
 
     .brand-header {
-      font-family: 'Oswald', Arial, sans-serif;
       font-size: 2.6em;
       font-weight: 700;
-      letter-spacing: 3px;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      color: #fff;
-      margin: 0 0 2em 0;
-      text-shadow:
-        0 1px 10px #c0392b33,
-        0 1px 1px #333,
-        0 2px 16px #000a;
-      position: relative;
       background: linear-gradient(90deg, #fff 60%, #e67e22 100%);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
       -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 1px 0 #0009);
-      letter-spacing: 2px;
-      user-select: none;
+      text-shadow: 0 1px 10px #c0392b33, 0 1px 1px #333, 0 2px 16px #000a;
+      margin-bottom: 2em;
     }
 
-    .brand-header:after {
+    .brand-header::after {
       content: '';
       display: block;
       width: 90px;
       height: 3px;
+      margin: 1.3em auto 0;
       background: linear-gradient(90deg, #c0392b 30%, #e67e22 70%);
-      margin: 1.3em auto 0 auto;
       border-radius: 2px;
       opacity: 0.8;
     }
 
     .links {
-      width: 100%;
       display: flex;
       flex-direction: column;
       gap: 1.25em;
-      margin-bottom: 2.7em;
-      align-items: center;
     }
 
     .link-btn {
+      display: block;
       width: 97%;
-      min-width: 210px;
+      margin: 0 auto;
+      padding: 1.07em 0;
       font-size: 1.15em;
-      font-family: 'Oswald', Arial, sans-serif;
       font-weight: 700;
       letter-spacing: 1.3px;
-      padding: 1.07em 0;
-      text-align: center;
       text-transform: uppercase;
+      text-decoration: none;
       color: #fff;
       background: linear-gradient(102deg, #191919 65%, #222 100%);
       border: 1.5px solid #333;
       border-radius: 0.55em;
-      margin: 0 auto;
       box-shadow:
         0 1.5px 8px 1.5px #0009 inset,
         0 2px 14px 0 #0005;
       position: relative;
       cursor: pointer;
-      transition:
-        border-color 0.16s,
-        box-shadow 0.16s,
-        background 0.19s,
-        color 0.17s;
-      text-decoration: none;
-      overflow: hidden;
+      transition: 0.2s ease;
     }
-    .link-btn span {
-      position: relative;
-      z-index: 2;
-    }
+
     .link-btn:before {
       content: '';
       position: absolute;
@@ -148,82 +124,66 @@
       background: repeating-linear-gradient(120deg, #222 0 2px, transparent 2px 8px);
       pointer-events: none;
       border-radius: inherit;
-      z-index: 1;
     }
 
-    /* Accent stripes/metal border on left */
     .link-btn:after {
       content: '';
       position: absolute;
-      left: 0; top: 0; bottom: 0;
+      left: 0;
+      top: 0;
+      bottom: 0;
       width: 6px;
-      border-radius: 0.5em 0 0 0.5em;
       background: linear-gradient(180deg, #c0392b 60%, #e67e22 100%);
       opacity: 0.93;
-      transition: opacity 0.22s;
-      z-index: 2;
+      border-radius: 0.5em 0 0 0.5em;
     }
 
-    /* Unique glows and hover for each button */
-    .link-btn:nth-child(1):hover, .link-btn:nth-child(1):focus { box-shadow: var(--glow), var(--shadow); border-color: #c0392b; }
-    .link-btn:nth-child(2):hover, .link-btn:nth-child(2):focus { box-shadow: var(--glow-orange), var(--shadow); border-color: #e67e22; }
-    .link-btn:nth-child(3):hover, .link-btn:nth-child(3):focus { box-shadow: var(--glow-insta), var(--shadow); border-color: #5851db; }
-    .link-btn:nth-child(4):hover, .link-btn:nth-child(4):focus { box-shadow: var(--glow-fb), var(--shadow); border-color: #1877f2; }
+    .link-btn:nth-child(1):hover { box-shadow: var(--glow), var(--shadow); border-color: #c0392b; }
+    .link-btn:nth-child(2):hover { box-shadow: var(--glow-orange), var(--shadow); border-color: #e67e22; }
+    .link-btn:nth-child(3):hover { box-shadow: var(--glow-insta), var(--shadow); border-color: #5851db; }
+    .link-btn:nth-child(4):hover { box-shadow: var(--glow-fb), var(--shadow); border-color: #1877f2; }
 
     .link-btn:active {
       background: linear-gradient(105deg, #1a1a1a 70%, #191919 100%);
       color: #e67e22;
     }
 
-    /* Tagline/footer integrated in the card */
     .tagline {
-      width: 100%;
-      margin: 2em auto 0 auto;
-      padding: 0.7em 0 0.2em 0;
-      font-size: 1.02em;
-      font-family: Arial, sans-serif;
-      color: #ffa06b;
-      letter-spacing: 1px;
-      text-align: center;
-      opacity: 0.88;
-      text-shadow: 0 2px 16px #111a, 0 1px 0 #2228;
-      border-top: 1.5px solid #252525;
+      margin-top: 2em;
+      font-size: 1em;
       font-style: italic;
-      user-select: none;
+      color: #ffa06b;
+      text-shadow: 0 2px 16px #111a, 0 1px 0 #2228;
+      opacity: 0.88;
+      border-top: 1.5px solid #252525;
+      padding-top: 1em;
     }
 
     @media (max-width: 600px) {
-      .container {
-        max-width: 99vw;
-        padding: 2.7em 0.3em 1.5em 0.3em;
-        border-radius: 0.7em;
-      }
       .brand-header {
-        font-size: 1.5em;
+        font-size: 1.6em;
       }
       .link-btn {
         font-size: 1em;
-        padding: 0.88em 0;
-        min-width: 130px;
-      }
-      .tagline {
-        font-size: 0.98em;
+        padding: 0.9em 0;
       }
     }
   </style>
 </head>
 <body>
+  <video autoplay muted loop playsinline id="bg-video">
+    <source src="Generated File May 15, 2025 - 9_45PM.mp4" type="video/mp4">
+  </video>
+
   <div class="container">
     <div class="brand-header">Burnt Out Laser Engraving</div>
     <div class="links">
-      <a class="link-btn" href="https://payhip.com/BurntOutLaserEngraving" target="_blank" rel="noopener"><span>Official Store</span></a>
-      <a class="link-btn" href="https://www.tiktok.com/@burntoutlaserengraving" target="_blank" rel="noopener"><span>TikTok</span></a>
-      <a class="link-btn" href="https://www.instagram.com/burntout_laserengraving" target="_blank" rel="noopener"><span>Instagram</span></a>
-      <a class="link-btn" href="https://www.facebook.com/profile.php?id=61561918272309&name=xhp_nt__fb__action__open_user" target="_blank" rel="noopener"><span>Facebook</span></a>
+      <a class="link-btn" href="https://payhip.com/BurntOutLaserEngraving" target="_blank">Official Store</a>
+      <a class="link-btn" href="https://www.tiktok.com/@burntoutlaserengraving" target="_blank">TikTok</a>
+      <a class="link-btn" href="https://www.instagram.com/burntout_laserengraving" target="_blank">Instagram</a>
+      <a class="link-btn" href="https://www.facebook.com/profile.php?id=61561918272309&name=xhp_nt__fb__action__open_user" target="_blank">Facebook</a>
     </div>
-    <div class="tagline">
-      Turning ideas into badass engravings.
-    </div>
+    <div class="tagline">Turning ideas into badass engravings.</div>
   </div>
 </body>
 </html>
